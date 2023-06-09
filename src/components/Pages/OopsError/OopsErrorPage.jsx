@@ -1,8 +1,17 @@
+import err from '../../../assets/image/error.gif';
+
 
 const OopsErrorPage = () => {
+    const handleBack = () => {
+        history.back()
+    }
     return (
-        <div>
-            <h1 className="text-6xl">erroror </h1>
+        <div className='mx-auto'>
+            <img className='mx-auto my-20' src={err} alt="" />
+            <div className='flex justify-center items-center'>
+                <h1 className="text-6xl text-center">You can access invalid path</h1>
+                <button className='text-sky-600 text-2xl ms-5 hover:underline font-bold' onClick={handleBack}>Go Back</button>
+            </div>
         </div>
     );
 };
