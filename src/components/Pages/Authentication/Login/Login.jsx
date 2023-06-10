@@ -1,12 +1,39 @@
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useHookContext from "../../../CustomHook/useHookContext";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
+    const { UserSignIn } = useHookContext();
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
     // TODO GET INPUT VALUE
+
+    const handleLogin = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password)
+        UserSignIn()
+            .then(result => {
+                console.log(result.user)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+    }
 
     return (
         <div className=' bg-green-700 py-[100px]'>
