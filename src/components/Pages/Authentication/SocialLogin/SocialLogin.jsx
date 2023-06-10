@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useHookContext from "../../../CustomHook/useHookContext";
 
 const SocialLogin = () => {
@@ -7,6 +8,28 @@ const SocialLogin = () => {
         googleLogin()
             .then(result => {
                 console.log(result.user)
+                const user = { name: result.user?.displayName, email: result.user?.email, image: result.user?.photoURL }
+                fetch('http://localhost:5000/users', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.insertedId) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Login Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+
+
+                    })
             })
             .catch(error => {
                 console.log(error.message)

@@ -7,7 +7,7 @@ const Main = () => {
     const LoginSignUp = location.pathname.includes('/login') || location.pathname.includes('/registration');
     const error = location.pathname.includes('/*');
     return (
-        <div>
+        <div className=" bg-white">
             {error || LoginSignUp || <Header />}
             <Outlet />
             {error || LoginSignUp || <Footer />}

@@ -24,10 +24,10 @@ const UserContext = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    const userProfileUpdate = (name, photoUrl) => {
+    const userProfileUpdate = (name, photo) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photoUrl
+            displayName: name, photoURL: photo
         });
     };
 

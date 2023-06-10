@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useHookContext from "../../../CustomHook/useHookContext";
-// import { useForm } from "react-hook-form";
-const user_image_upload_api = import.meta.env.VITE_IMAGE_UPLOAD
+import Swal from "sweetalert2";
+
 const SignUp = () => {
     const { newCreateUsers, userProfileUpdate } = useHookContext()
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
     // TODO GET INPUT VALUE
-    const image_hosing_url = `https://api.imgbb.com/1/upload?key=${user_image_upload_api}`
+
 
     const handleSignUp = e => {
         e.preventDefault();
@@ -18,53 +19,68 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         const conPassword = form.conPassword.value;
-        const image = form.image.files[0];
-        console.log(name, email, password, conPassword, image)
+        const photo = form.photo.value;
+
+        console.log(conPassword)
+
+        //   console.log(user)
 
 
-        const users = { name: name, email: email }
-        console.log(users)
-
-
+        const users = { name: name, email: email, image: photo }
+        // console.log(users)
         newCreateUsers(email, password)
-
             .then(result => {
-                console.log(result.user);
-                userProfileUpdate(name, image)
-                    .then(result => {
-                        console.log(result.user)
-                        const formData = new FormData();
-                        formData.append('image', image)
-                        fetch(image_hosing_url, {
-                            method: "POST",
-                            body: formData
-                        })
-                            .then(res => res.json())
-                            .then(imgRes => {
-                                console.log(imgRes)
-                                if (imgRes.success) {
-                                    const img = imgRes.data.display_url;
-                                    const { name, email } = users;
-                                    // TODO
-                                    const user = { name, email, image: img }
-                                }
-                            })
-                        fetch('http://localhost:5000/users', {
-                            method: "POST",
-                            headers: {
-                                "content-type": "application/json"
-                            },
-                            body: JSON.stringify(user)
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                console.log(data)
-                            })
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                    })
+                if (result && result.user) {
+                    const loginUser = result.user;
+                    // const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
+                    console.log(loginUser);
+                    // console.log(users)
 
+                    userProfileUpdate(name, photo)
+                        // console.log(name, photo)
+                        .then(result => {
+                            if (result && result?.user) {
+                                const loginUser = result?.user;
+                                console.log(loginUser)
+                                // const users = { name: loginUser.displayName, email: loginUser.email, image: loginUser.photoURL }
+                                // console.log(users)
+
+                                fetch('http://localhost:5000/users', {
+                                    method: "POST",
+                                    headers: {
+                                        "content-type": "application/json"
+                                    },
+                                    body: JSON.stringify(users)
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        console.log(data)
+
+                                        if (data.insertedId) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Sign Up Successfully',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            })
+                                            navigate("/")
+                                        }
+
+                                    })
+
+                            }
+                            else {
+                                console.log('unable access')
+                            }
+                        })
+
+                        .catch(error => {
+                            console.log(error.message)
+                        });
+                }
+                else {
+                    console.log('unable access')
+                }
             })
             .catch(error => {
                 console.log(error.message)
@@ -119,12 +135,19 @@ const SignUp = () => {
                             </span>
                         </label>
                     </div>
-                    <div className='mb-3 mt-5'>
+                    {/* <div className='mb-3 mt-5'>
                         <label>
                             <span className='text-2xl font-serif font-bold text-sky-400'>Photo Url</span>
                         </label>
                         <br />
                         <input type="file" className="file-input file-input-bordered file-input-success w-full max-w-xs text-2xl mt-2" name="image" required />
+                    </div> */}
+                    <div className='mb-3 mt-5'>
+                        <label>
+                            <span className='text-2xl font-serif font-bold text-sky-400'>Photo Url</span>
+                        </label>
+                        <br />
+                        <input type="text" className="h-[68px] w-[520px] text-2xl text-black bg-slate-50 ps-3 mt-2" name="photo" id="photo" required />
                     </div>
                     <input className="w-[600px] h-[70px] bg-sky-500 rounded-lg text-3xl text-white font-bold font-serif mt-20" type="submit" value="Sign Up" />
                 </form>

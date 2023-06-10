@@ -5,7 +5,7 @@ const Classes = () => {
     const { classes } = useClasses();
     console.log(classes)
     return (
-        <div className="grid grid-cols-3 gap-3 mx-auto w-[1000px]">
+        <div className="grid grid-cols-4 gap-4 mx-auto w-[1650px] my-20">
             {
                 classes.map(eachClass => <ClassesCard
                     key={eachClass._id}

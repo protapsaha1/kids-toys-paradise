@@ -1,6 +1,6 @@
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useHookContext from "../../../CustomHook/useHookContext";
 import Swal from "sweetalert2";
@@ -9,7 +9,9 @@ import Swal from "sweetalert2";
 const Login = () => {
     const { UserSignIn } = useHookContext();
     const [show, setShow] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
+    const from = location.state?.from.pathName || '/';
     // TODO GET INPUT VALUE
 
     const handleLogin = e => {
@@ -28,7 +30,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate('/')
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.log(error.message)
@@ -39,7 +41,7 @@ const Login = () => {
         <div className=' bg-green-700 py-[100px]'>
             <div className='w-[700px] h-[1000px] bg-white mx-auto py-32 px-12'>
                 <h1 className="text-6xl text-slate-900 font-serif font-bold text-center">Login Now !</h1>
-                <form>
+                <form onSubmit={handleLogin}>
                     <div className='mb-3 mt-20'>
                         <label>
                             <span className='text-2xl font-serif font-bold text-sky-400 mb-1'>Email Address</span>
