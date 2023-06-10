@@ -16,6 +16,7 @@ import EnrolledStudents from "../components/Pages/Dashboard/Instructors/Enrolled
 import AdminHome from "../components/Pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageClasses from "../components/Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../components/Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import UserPrivateRoute from "../components/PrivateRoute/UserRoute/UserPrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -43,18 +44,18 @@ const router = createBrowserRouter([
             // instructors
             {
                 path: 'instructors',
-                element: <Instructors />
+                element: <UserPrivateRoute><Instructors /></UserPrivateRoute>
             },
             // classes
             {
                 path: 'classes',
-                element: <Classes />
+                element: <UserPrivateRoute><Classes /></UserPrivateRoute>
             }
         ]
     },
     {
         path: 'dashboard',
-        element: <Dashboard />,
+        element: <UserPrivateRoute><Dashboard /></UserPrivateRoute>,
         children: [
             // Student route
             {

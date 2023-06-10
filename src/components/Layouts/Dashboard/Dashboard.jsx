@@ -1,4 +1,4 @@
-import { FaHome } from "react-icons/fa";
+import { FaChalkboardTeacher, FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -33,7 +33,7 @@ const Dashboard = () => {
                     {
                         isAdmin ?
                             <>
-                                <li><NavLink to="/dashboard/admin-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Admin Home</NavLink></li>
+                                <li><NavLink to="/dashboard/admin-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12" /> Admin Home</NavLink></li>
                                 <li><NavLink to="/dashboard/manage-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Classes</NavLink></li>
                                 <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Users</NavLink></li>
                             </>
@@ -53,9 +53,9 @@ const Dashboard = () => {
 
 
                     <hr className="my-10 bg-black h-1 shadow-lg" />
-                    <li><NavLink to="/" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Home</NavLink></li>
+                    <li><NavLink to="/" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12" /> Home</NavLink></li>
                     <li><NavLink to="/classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">Classes</NavLink></li>
-                    <li><NavLink to="/instructors" className="flex items-center text-3xl font-bold font-serif text-slate-900">Instructors</NavLink></li>
+                    <li><NavLink to="/instructors" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaChalkboardTeacher className="w-12 h-12" /> Instructors</NavLink></li>
 
                 </ul>
 

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import app from "../../firebase/firebase.config";
+import axios from "axios";
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -40,7 +41,21 @@ const UserContext = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, loginUser => {
             setUser(loginUser)
-            setLoading(false);
+
+
+            if (loginUser) {
+                axios.post('http://localhost:5000/jwtprotect', {
+                    email: loginUser?.email
+                })
+                    .then(data => {
+                        setLoading(false);
+                        localStorage.setItem('emagraphy-access', data.data.token)
+                    })
+                    .catch(error => { console.log(error.message) })
+            }
+            else {
+                localStorage.removeItem('emagraphy-access')
+            }
         })
         return () => {
             return unSubscribe();

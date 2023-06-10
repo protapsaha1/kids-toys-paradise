@@ -26,18 +26,17 @@ const SignUp = () => {
         //   console.log(user)
 
 
-        const users = { name: name, email: email, image: photo }
+        // const users = { name: name, email: email, image: photo }
         // console.log(users)
         newCreateUsers(email, password)
             .then(result => {
                 if (result && result.user) {
                     const loginUser = result.user;
-                    // const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
+                    const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
                     console.log(loginUser);
                     // console.log(users)
 
                     userProfileUpdate(name, photo)
-                        // console.log(name, photo)
                         .then(result => {
                             if (result && result?.user) {
                                 const loginUser = result?.user;

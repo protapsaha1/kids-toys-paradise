@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import emaBird from '../../../../src/assets/image/emaBird.png';
 import useHookContext from "../../CustomHook/useHookContext";
 import SubHeader from "./SubHeader/SubHeader";
 
 const Header = () => {
     const { user } = useHookContext();
+    const location = useLocation();
+    const subHeader = location.pathname.includes('/classes') || location.pathname.includes('/instructors');
+
     const navLinks = <>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><Link to="/">Home</Link></li>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><Link to="/instructors">Instructors</Link></li>
@@ -42,8 +45,7 @@ const Header = () => {
                     }
                 </div>
             </div>
-            {user && <SubHeader />
-            }
+            {subHeader || user && <SubHeader />}
         </>
     );
 };
