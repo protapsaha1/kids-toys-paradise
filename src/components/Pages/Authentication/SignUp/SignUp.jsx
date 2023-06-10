@@ -10,7 +10,7 @@ const SignUp = () => {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
     // TODO GET INPUT VALUE
-
+    // TODO
 
     const handleSignUp = e => {
         e.preventDefault();
@@ -135,13 +135,6 @@ const SignUp = () => {
                             </span>
                         </label>
                     </div>
-                    {/* <div className='mb-3 mt-5'>
-                        <label>
-                            <span className='text-2xl font-serif font-bold text-sky-400'>Photo Url</span>
-                        </label>
-                        <br />
-                        <input type="file" className="file-input file-input-bordered file-input-success w-full max-w-xs text-2xl mt-2" name="image" required />
-                    </div> */}
                     <div className='mb-3 mt-5'>
                         <label>
                             <span className='text-2xl font-serif font-bold text-sky-400'>Photo Url</span>

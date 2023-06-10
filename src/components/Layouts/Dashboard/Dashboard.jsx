@@ -2,8 +2,8 @@ import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-    // const isAdmin = false;
-    const isInstructor = true;
+    const isAdmin = true;
+    // const isInstructor = true;
     // const isStudent = true;
     return (
         <div className="drawer lg:drawer-open">
@@ -18,37 +18,37 @@ const Dashboard = () => {
                 <ul className="menu p-4 w-[500px] h-full text-base-content bg-yellow-300">
                     {
 
-                        isInstructor
+                        isAdmin
                             // isInstructor
                             // isStudent
 
                             ?
-                            // <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Admin</span></h1>
-                            <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Instructor</span></h1>
+                            // <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Instructor</span></h1>
+                            <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Admin</span></h1>
                             :
                             <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Students</span></h1>
                     }
 
 
                     {
-                        isInstructor ?
-                            // <>
-                            //     <li><NavLink to="/dashboard/admin-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Admin Home</NavLink></li>
-                            //     <li><NavLink to="/dashboard/manage-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Classes</NavLink></li>
-                            //     <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Users</NavLink></li>
-                            // </>
-
+                        isAdmin ?
+                            <>
+                                <li><NavLink to="/dashboard/admin-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Admin Home</NavLink></li>
+                                <li><NavLink to="/dashboard/manage-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Classes</NavLink></li>
+                                <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900">Manage Users</NavLink></li>
+                            </>
+                            :
                             <>
                                 <li><NavLink to="/dashboard/instructors-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Instructors Home</NavLink></li>
                                 <li><NavLink to="/dashboard/add-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">Add Class</NavLink></li>
                                 <li><NavLink to="/dashboard/enrolled-students" className="flex items-center text-3xl font-bold font-serif text-slate-900">Enrolled Students</NavLink></li>
                             </>
-                            :
-                            <>
-                                <li><NavLink to="/dashboard/student-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Student Home</NavLink></li>
-                                <li><NavLink to="/dashboard/my-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">My Classes</NavLink></li>
-                                <li><NavLink to="/dashboard/enrolled-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">My Enrolled Classes</NavLink></li>
-                            </>
+
+                        // <>
+                        //     <li><NavLink to="/dashboard/student-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome /> Student Home</NavLink></li>
+                        //     <li><NavLink to="/dashboard/my-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">My Classes</NavLink></li>
+                        //     <li><NavLink to="/dashboard/enrolled-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">My Enrolled Classes</NavLink></li>
+                        // </>
                     }
 
 
