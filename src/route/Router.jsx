@@ -18,7 +18,7 @@ import ManageClasses from "../components/Pages/Dashboard/Admin/ManageClasses/Man
 import ManageUsers from "../components/Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import UserPrivateRoute from "../components/PrivateRoute/UserRoute/UserPrivateRoute";
 import ErrorPage from "../components/Layouts/ErrorPage/ErrorPage";
-import Payment from "../components/Pages/Dashboard/Student/Payment/Payment";
+import Payment from "../components/Pages/Dashboard/Student/Payments/Payment/Payment";
 
 const router = createBrowserRouter([
     {

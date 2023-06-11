@@ -4,9 +4,10 @@ import Swal from "sweetalert2";
 import useTitle from "../../../../CustomHook/useTitle";
 
 const ManageUsers = () => {
-    useTitle("Manage User")
+    useTitle("Manage User");
+    
     const { users, refetch } = useUsers();
-    console.log(users)
+    // console.log(users)
 
 
     const handleIsAdmin = user => {
