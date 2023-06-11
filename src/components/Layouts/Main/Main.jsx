@@ -5,12 +5,12 @@ import Footer from "../../Shared/Footer/Footer";
 const Main = () => {
     const location = useLocation();
     const LoginSignUp = location.pathname.includes('/login') || location.pathname.includes('/registration');
-    const error = location.pathname.includes('/*');
+
     return (
         <div className=" bg-white">
-            {error || LoginSignUp || <Header />}
+            {LoginSignUp || <Header />}
             <Outlet />
-            {error || LoginSignUp || <Footer />}
+            {LoginSignUp || <Footer />}
         </div>
     );
 };

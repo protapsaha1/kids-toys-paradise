@@ -1,6 +1,8 @@
 import useClasses from "../../../../CustomHook/useClasses";
+import useTitle from "../../../../CustomHook/useTitle";
 
 const ManageClasses = () => {
+    useTitle("Manage Classes");
     const { classes } = useClasses();
     console.log(classes)
     return (

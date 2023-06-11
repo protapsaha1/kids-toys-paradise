@@ -18,7 +18,6 @@ const ClassesCard = ({ eachClass }) => {
     const bookedClassData = { classId: _id, name: class_name, price: price, image: image, email: user?.email };
 
     const handleBookingsClass = () => {
-        // console.log('this is cart', id)
         if (user && user?.email) {
             fetch('http://localhost:5000/bookedClass', {
                 method: "POST",

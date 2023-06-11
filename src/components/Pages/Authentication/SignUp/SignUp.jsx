@@ -4,11 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useHookContext from "../../../CustomHook/useHookContext";
 import Swal from "sweetalert2";
+import useTitle from "../../../CustomHook/useTitle";
 
 const SignUp = () => {
+    useTitle("SignUp")
     const { newCreateUsers, userProfileUpdate } = useHookContext()
     const [show, setShow] = useState(false);
+    const [conShow, setConShow] = useState(false);
     const navigate = useNavigate();
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     // TODO GET INPUT VALUE
     // TODO
 
@@ -21,26 +26,30 @@ const SignUp = () => {
         const conPassword = form.conPassword.value;
         const photo = form.photo.value;
 
-        console.log(conPassword)
+        if (password === conPassword) {
+            setError("Password must be confirm");
+            return;
+        }
 
-        //   console.log(user)
+        if (password.length >= 6) {
+            setError("password must be 6 characters");
+        }
 
+        if (/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
+            setError("Password have one uppercase ,one lowercase and one special character");
+            setSuccess("Nice Strong password");
+        }
 
-        const users = { name: name, email: email, image: photo }
-        // console.log(users)
+        const users = { name: name, email: email, image: photo };
         newCreateUsers(email, password)
             .then(result => {
                 const loginUser = result.user;
-                // const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
                 console.log(loginUser);
-                // console.log(users)
 
                 userProfileUpdate(name, photo)
                     .then(result => {
-                        const loginUser = result?.user;
+                        const loginUser = result.user;
                         console.log(loginUser)
-                        // const users = { name: loginUser.displayName, email: loginUser.email, image: loginUser.photoURL }
-                        // console.log(users)
 
                         fetch('http://localhost:5000/users', {
                             method: "POST",
@@ -51,8 +60,6 @@ const SignUp = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
-                                console.log(data)
-
                                 if (data.insertedId) {
                                     Swal.fire({
                                         icon: 'success',
@@ -112,6 +119,8 @@ const SignUp = () => {
                                 }
                             </span>
                         </label>
+                        <p className="text-xl font-serif font-semibold text-red-500">{error}</p>
+                        <p className="text-xl font-serif font-semibold text-green-500">{success}</p>
                     </div>
                     <div className='mb-3 mt-10'>
                         <label>
@@ -119,10 +128,10 @@ const SignUp = () => {
                         </label>
                         <br />
                         <label className="flex items-center">
-                            <input type={show ? "text" : "password"} className='h-[68px] w-[520px] text-2xl text-black bg-slate-50 ps-3 mt-2' placeholder="Confirm Your Password" name="conPassword" id="conPassword" required />
-                            <span className="bg-slate-500 h-[68px] px-4 py-3 w-20" onClick={() => setShow(!show)}>
+                            <input type={conShow ? "text" : "password"} className='h-[68px] w-[520px] text-2xl text-black bg-slate-50 ps-3 mt-2' placeholder="Confirm Your Password" name="conPassword" id="conPassword" required />
+                            <span className="bg-slate-500 h-[68px] px-4 py-3 w-20" onClick={() => setConShow(!conShow)}>
                                 {
-                                    show ? <FaEyeSlash className="w-12 h-12 text-slate-900" /> : <FaEye className="w-12 h-12 text-slate-900" />
+                                    conShow ? <FaEyeSlash className="w-12 h-12 text-slate-900" /> : <FaEye className="w-12 h-12 text-slate-900" />
                                 }
                             </span>
                         </label>

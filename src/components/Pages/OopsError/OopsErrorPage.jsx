@@ -8,8 +8,8 @@ const OopsErrorPage = () => {
     return (
         <div className='mx-auto py-20'>
             <img className='mx-auto my-20' src={err} alt="" />
-            <div className='flex justify-center items-center'>
-                <h1 className="text-6xl text-center">You can,t access this path</h1>
+            <div className='flex justify-center items-center pb-56'>
+                <h1 className="text-6xl text-center text-slate-950 ">You can,t access this path</h1>
                 <button className='text-sky-600 text-2xl ms-5 hover:underline font-bold' onClick={handleBack}>Go Back</button>
             </div>
         </div>

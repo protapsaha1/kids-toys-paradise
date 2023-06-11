@@ -4,14 +4,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useHookContext from "../../../CustomHook/useHookContext";
 import Swal from "sweetalert2";
+import useTitle from "../../../CustomHook/useTitle";
 
 
 const Login = () => {
+    useTitle("Login")
     const { UserSignIn } = useHookContext();
     const [show, setShow] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathName || '/';
+    const from = location.state?.from?.pathname || '/';
     // TODO GET INPUT VALUE
 
     const handleLogin = e => {

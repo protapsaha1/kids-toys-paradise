@@ -24,9 +24,10 @@ const useAxiosHook = () => {
         axiosProtect.interceptors.response.use(
             res => res,
             async (error) => {
-                if (error.res && error.res.status === 401 || error.res && error.res.status === 403)
-                    logOut();
-                navigate('/login');
+                if (error.res && error.res.status === 401 || error.res && error.res.status === 403) {
+                    await logOut();
+                    navigate('/login');
+                }
                 return Promise.reject(error);
             }
         )

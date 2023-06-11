@@ -1,10 +1,12 @@
 import Swal from "sweetalert2";
 import useHookContext from "../../../../CustomHook/useHookContext";
+import useTitle from "../../../../CustomHook/useTitle";
 
 
 
 const user_image_upload_api = import.meta.env.VITE_IMAGE_UPLOAD
 const AddClasses = () => {
+    useTitle("Add Classes")
     const { user } = useHookContext();
     const image_hosing_url = `https://api.imgbb.com/1/upload?key=${user_image_upload_api}`;
 
@@ -17,9 +19,20 @@ const AddClasses = () => {
         const seats = parseFloat(form.seats.value);
         const price = parseFloat(form.price.value);
         const image = form.image.files[0];
-        // console.log(name, instructorName, instructorEmail, seats, price, image)
-        const classInfo = { class_name: name, instructor_name: instructorName, instructor_email: instructorEmail, seats: seats, price: price }
+        const classInfo = { class_name: name, instructor_name: instructorName, instructor_email: instructorEmail, seats: seats, price: price };
+        const instructorInfo = { name: instructorName, email: instructorEmail };
 
+        fetch('http://localhost:5000/instructors', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(instructorInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
         const formData = new FormData();
         formData.append('image', image)
         fetch(image_hosing_url, {
@@ -28,13 +41,11 @@ const AddClasses = () => {
         })
             .then(res => res.json())
             .then(imgRes => {
-                console.log(imgRes)
                 if (imgRes.success) {
                     const img = imgRes.data.display_url;
                     const { class_name, instructor_name, instructor_email, seats, price } = classInfo;
                     // TODO
                     const classData = { class_name, instructor_name, instructor_email, seats, price, image: img, status: 'pending' }
-                    console.log(classData)
 
                     fetch('http://localhost:5000/classes', {
                         method: "POST",
@@ -45,8 +56,6 @@ const AddClasses = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data)
-
                             if (data.insertedId) {
                                 Swal.fire({
                                     icon: 'success',

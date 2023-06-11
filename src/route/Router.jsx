@@ -17,6 +17,8 @@ import AdminHome from "../components/Pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageClasses from "../components/Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../components/Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import UserPrivateRoute from "../components/PrivateRoute/UserRoute/UserPrivateRoute";
+import ErrorPage from "../components/Layouts/ErrorPage/ErrorPage";
+import Payment from "../components/Pages/Dashboard/Student/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -36,11 +38,7 @@ const router = createBrowserRouter([
                 path: 'registration',
                 element: <SignUp />
             },
-            // Error page
-            {
-                path: '*',
-                element: <OopsErrorPage />
-            },
+
             // instructors
             {
                 path: 'instructors',
@@ -51,6 +49,17 @@ const router = createBrowserRouter([
                 path: 'classes',
                 element: <UserPrivateRoute><Classes /></UserPrivateRoute>
             }
+        ]
+    },
+    {
+        path: '/',
+        element: <ErrorPage />,
+        children: [
+            // Error page
+            {
+                path: '*',
+                element: <OopsErrorPage />
+            },
         ]
     },
     {
@@ -69,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: 'enrolled-classes',
                 element: <EnrolledClasses />
+            },
+            {
+                path: 'payment',
+                element: <Payment />
             },
             // Instructors route
             {

@@ -1,18 +1,19 @@
-import Swal from "sweetalert2";
 import useHookContext from "../../../CustomHook/useHookContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
     const { googleLogin } = useHookContext();
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathName || '/';
-
+    const from = location.state?.from?.pathname || '/';
+    
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
                 console.log(result.user)
-                const user = { name: result.user?.displayName, email: result.user?.email, image: result.user?.photoURL }
+                const loginUser = result.user;
+                const user = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL };
                 fetch('http://localhost:5000/users', {
                     method: "POST",
                     headers: {
@@ -30,16 +31,16 @@ const SocialLogin = () => {
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            navigate(from, { replace: true })
                         }
-
-
                     })
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.log(error.message)
             })
-    }
+    };
+
+
     return (
         <>
             <button onClick={handleGoogleLogin} className="flex items-center text-3xl font-serif font-bold text-center my-16 mx-auto">

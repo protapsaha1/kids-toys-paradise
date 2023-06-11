@@ -1,8 +1,10 @@
 import { FaChalkboardTeacher, FaUserCheck } from "react-icons/fa";
 import useUsers from "../../../../CustomHook/useUsers";
 import Swal from "sweetalert2";
+import useTitle from "../../../../CustomHook/useTitle";
 
 const ManageUsers = () => {
+    useTitle("Manage User")
     const { users, refetch } = useUsers();
     console.log(users)
 
@@ -82,6 +84,10 @@ const ManageUsers = () => {
                                     <h1 className="text-2xl font-serif font-bold text-slate-950">{user?.email}</h1>
                                 </td>
                                 <td>
+                                    {
+                                        console.log(users?.role)
+
+                                    }
                                     {
                                         users?.role === 'admin' ? 'admin' :
                                             <button className="bg-rose-800 px-6 py-5 rounded-xl hover:bg-rose-600" onClick={() => handleIsAdmin(user)}><FaUserCheck className="text-white w-10 h-10" /></button>
