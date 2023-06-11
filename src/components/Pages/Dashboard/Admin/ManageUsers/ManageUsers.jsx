@@ -5,7 +5,7 @@ import useTitle from "../../../../CustomHook/useTitle";
 
 const ManageUsers = () => {
     useTitle("Manage User");
-    
+
     const { users, refetch } = useUsers();
     // console.log(users)
 
@@ -52,7 +52,7 @@ const ManageUsers = () => {
             <div className="overflow-x-auto w-[1800px] border-l-2 border-r-2  shadow-lg ">
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className="bg-sky-500">
                         <tr>
                             <th className="text-2xl font-serif font-bold text-slate-950">#</th>
                             <th className="text-2xl font-serif font-bold text-slate-950">Name</th>
@@ -86,16 +86,16 @@ const ManageUsers = () => {
                                 </td>
                                 <td>
                                     {
-                                        console.log(users?.role)
-
-                                    }
-                                    {
-                                        users?.role === 'admin' ? 'admin' :
+                                        user?.role === 'admin' ?
+                                            <h1 className="text-2xl font-serif font-bold text-slate-950">Admin</h1>
+                                            :
                                             <button className="bg-rose-800 px-6 py-5 rounded-xl hover:bg-rose-600" onClick={() => handleIsAdmin(user)}><FaUserCheck className="text-white w-10 h-10" /></button>
                                     }
                                 </td>
                                 <th>
-                                    {users?.role === 'instructor' ? 'instructor' :
+                                    {user?.role === 'instructor' ?
+                                        <h1 className="text-2xl font-serif font-bold text-slate-950">Instructor</h1>
+                                        :
                                         <button className="bg-blue-800 px-6 py-5 rounded-xl hover:bg-blue-600" onClick={() => handleIsInstructor(user)}><FaChalkboardTeacher className="text-white w-10 h-10" /></button>
                                     }
                                 </th>

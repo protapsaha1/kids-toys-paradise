@@ -7,15 +7,16 @@ import Swal from "sweetalert2";
 import useTitle from "../../../CustomHook/useTitle";
 
 const SignUp = () => {
-    useTitle("SignUp")
+    useTitle("SignUp");
+
+
     const { newCreateUsers, userProfileUpdate } = useHookContext()
     const [show, setShow] = useState(false);
     const [conShow, setConShow] = useState(false);
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    // TODO GET INPUT VALUE
-    // TODO
+
 
     const handleSignUp = e => {
         e.preventDefault();
@@ -26,17 +27,19 @@ const SignUp = () => {
         const conPassword = form.conPassword.value;
         const photo = form.photo.value;
 
-        if (password === conPassword) {
+        if (password !== conPassword) {
             setError("Password must be confirm");
             return;
         }
 
-        if (password.length >= 6) {
+        if (password.length !== 6 || password.length >= 6) {
             setError("password must be 6 characters");
         }
 
-        if (/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
+        if (!/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
             setError("Password have one uppercase ,one lowercase and one special character");
+        }
+        if (/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
             setSuccess("Nice Strong password");
         }
 
@@ -49,8 +52,8 @@ const SignUp = () => {
                 userProfileUpdate(name, photo)
                     .then(result => {
                         const loginUser = result.user;
-                        console.log(loginUser)
-
+                        console.log(loginUser);
+                        // TODO POST DATA 
                         fetch('http://localhost:5000/users', {
                             method: "POST",
                             headers: {
@@ -60,6 +63,8 @@ const SignUp = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
+                                console.log(data)
+
                                 if (data.insertedId) {
                                     Swal.fire({
                                         icon: 'success',
@@ -67,19 +72,16 @@ const SignUp = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     })
-                                    navigate("/")
                                 }
-
                             })
-
-
-
                     })
 
                     .catch(error => {
                         console.log(error.message)
                     });
+                form.reset();
 
+                navigate("/");
             })
             .catch(error => {
                 console.log(error.message)

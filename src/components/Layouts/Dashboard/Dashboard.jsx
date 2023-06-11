@@ -1,4 +1,4 @@
-import { FaBars, FaChalkboardTeacher, FaHome, FaMoneyBillAlt, FaSchool } from "react-icons/fa";
+import { FaBars, FaChalkboardTeacher, FaHome, FaMoneyBillAlt, FaSchool, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 // import useAdmin from "../../CustomHook/useAdmin";
 // import useInstructors from "../../CustomHook/useInstructors";
@@ -47,8 +47,8 @@ const Dashboard = () => {
                             ?
                             <>
                                 <li><NavLink to="/dashboard/admin-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12 mr-3" />   Admin Home</NavLink></li>
-                                <li><NavLink to="/dashboard/manage-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900">  Manage Classes</NavLink></li>
-                                <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900">  Manage Users</NavLink></li>
+                                <li><NavLink to="/dashboard/manage-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaSchool className="w-12 h-12 mr-3" />Manage Classes</NavLink></li>
+                                <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaUsers className="w-12 h-12 mr-3" />  Manage Users</NavLink></li>
                             </>
                             :
                             <>
