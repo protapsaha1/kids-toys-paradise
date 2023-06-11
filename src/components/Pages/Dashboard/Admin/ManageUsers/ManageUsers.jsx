@@ -74,13 +74,12 @@ const ManageUsers = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            <div className="font-bold"></div>
-                                            <div className="text-2xl font-serif font-bold text-slate-950">{user?.name}</div>
+                                            <h1 className="text-2xl font-serif font-bold text-slate-950">{user?.name}</h1>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span className="text-2xl font-serif font-bold text-slate-950">{user?.email}</span>
+                                    <h1 className="text-2xl font-serif font-bold text-slate-950">{user?.email}</h1>
                                 </td>
                                 <td>
                                     {

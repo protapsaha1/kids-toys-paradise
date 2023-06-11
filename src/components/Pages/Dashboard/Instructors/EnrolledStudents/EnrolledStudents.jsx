@@ -1,7 +1,7 @@
 
 const EnrolledStudents = () => {
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-[1800px] border-l-2 border-r-2 shadow-lg ">
             <table className="table">
                 {/* head */}
                 <thead>

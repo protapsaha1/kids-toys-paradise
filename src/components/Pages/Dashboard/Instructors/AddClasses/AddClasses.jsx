@@ -33,7 +33,7 @@ const AddClasses = () => {
                     const img = imgRes.data.display_url;
                     const { class_name, instructor_name, instructor_email, seats, price } = classInfo;
                     // TODO
-                    const classData = { class_name, instructor_name, instructor_email, seats, price, image: img }
+                    const classData = { class_name, instructor_name, instructor_email, seats, price, image: img, status: 'pending' }
                     console.log(classData)
 
                     fetch('http://localhost:5000/classes', {

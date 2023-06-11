@@ -1,28 +1,22 @@
 
 const MyClasses = () => {
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-[1800px] border-l-2 border-r-2  shadow-lg ">
             <table className="table">
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>
-                            <label>
-                                <input type="checkbox" className="checkbox" />
-                            </label>
+                        <th className="text-2xl font-serif font-bold text-slate-950">
                         </th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
-                        <th></th>
+                        <th className="text-2xl font-serif font-bold text-slate-950">Name</th>
+                        <th className="text-2xl font-serif font-bold text-slate-950">Job</th>
+                        <th className="text-2xl font-serif font-bold text-slate-950">Favorite Color</th>
+                        <th className="text-2xl font-serif font-bold text-slate-950"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>
-                            <label>
-                                <input type="checkbox" className="checkbox" />
-                            </label>
                         </th>
                         <td>
                             <div className="flex items-center space-x-3">
@@ -32,15 +26,12 @@ const MyClasses = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-bold">Hart Hagerty</div>
-                                    <div className="text-sm opacity-50">United States</div>
+                                    <h1 className="text-2xl font-serif font-bold text-slate-950">United States</h1>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            Zemlak, Daniel and Leannon
-                            <br />
-                            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                            <h1 className="text-2xl font-serif font-bold text-slate-950">Desktop Support Technician</h1>
                         </td>
                         <td>Purple</td>
                         <th>
