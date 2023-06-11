@@ -1,8 +1,12 @@
 import Swal from "sweetalert2";
 import useHookContext from "../../../CustomHook/useHookContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
     const { googleLogin } = useHookContext();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathName || '/';
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -26,6 +30,7 @@ const SocialLogin = () => {
                                 showConfirmButton: false,
                                 timer: 1500
                             })
+                            navigate(from, { replace: true })
                         }
 
 

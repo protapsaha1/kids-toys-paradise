@@ -11,7 +11,7 @@ const Login = () => {
     const [show, setShow] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from.pathName || '/';
+    const from = location.state?.from?.pathName || '/';
     // TODO GET INPUT VALUE
 
     const handleLogin = e => {
@@ -20,11 +20,10 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
-        UserSignIn()
+        UserSignIn(email, password)
             .then(result => {
                 console.log(result.user)
                 Swal.fire({
-                    position: 'top-end',
                     icon: 'success',
                     title: 'Your work has been saved',
                     showConfirmButton: false,
@@ -47,7 +46,7 @@ const Login = () => {
                             <span className='text-2xl font-serif font-bold text-sky-400 mb-1'>Email Address</span>
                         </label>
                         <br />
-                        <input type="email" className='h-[68px] w-[600px] text-2xl text-black bg-slate-50 ps-3 border-b-red-500' placeholder="Enter Your Email" name="email" id="" />
+                        <input type="email" className='h-[68px] w-[600px] text-2xl text-black bg-slate-50 ps-3 border-b-red-500' placeholder="Enter Your Email" name="email" id="email" />
                     </div>
                     <div>
                         <label>
@@ -55,7 +54,7 @@ const Login = () => {
                         </label>
                         <br />
                         <label className="flex items-center">
-                            <input type={show ? "text" : "password"} className='h-[68px] w-[520px] text-2xl text-black bg-slate-50 ps-3' placeholder="Enter Your Password" name="email" id="" />
+                            <input type={show ? "text" : "password"} className='h-[68px] w-[520px] text-2xl text-black bg-slate-50 ps-3' placeholder="Enter Your Password" name="password" id="password" />
                             <span className="bg-slate-500 h-[68px] px-4 py-3 w-20" onClick={() => setShow(!show)}>
                                 {
                                     show ? <FaEyeSlash className="w-12 h-12 text-slate-900" /> : <FaEye className="w-12 h-12 text-slate-900" />

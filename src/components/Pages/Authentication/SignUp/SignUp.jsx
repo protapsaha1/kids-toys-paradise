@@ -26,60 +26,53 @@ const SignUp = () => {
         //   console.log(user)
 
 
-        // const users = { name: name, email: email, image: photo }
+        const users = { name: name, email: email, image: photo }
         // console.log(users)
         newCreateUsers(email, password)
             .then(result => {
-                if (result && result.user) {
-                    const loginUser = result.user;
-                    const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
-                    console.log(loginUser);
-                    // console.log(users)
+                const loginUser = result.user;
+                // const users = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL }
+                console.log(loginUser);
+                // console.log(users)
 
-                    userProfileUpdate(name, photo)
-                        .then(result => {
-                            if (result && result?.user) {
-                                const loginUser = result?.user;
-                                console.log(loginUser)
-                                // const users = { name: loginUser.displayName, email: loginUser.email, image: loginUser.photoURL }
-                                // console.log(users)
+                userProfileUpdate(name, photo)
+                    .then(result => {
+                        const loginUser = result?.user;
+                        console.log(loginUser)
+                        // const users = { name: loginUser.displayName, email: loginUser.email, image: loginUser.photoURL }
+                        // console.log(users)
 
-                                fetch('http://localhost:5000/users', {
-                                    method: "POST",
-                                    headers: {
-                                        "content-type": "application/json"
-                                    },
-                                    body: JSON.stringify(users)
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        console.log(data)
-
-                                        if (data.insertedId) {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Sign Up Successfully',
-                                                showConfirmButton: false,
-                                                timer: 1500
-                                            })
-                                            navigate("/")
-                                        }
-
-                                    })
-
-                            }
-                            else {
-                                console.log('unable access')
-                            }
+                        fetch('http://localhost:5000/users', {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(users)
                         })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data)
 
-                        .catch(error => {
-                            console.log(error.message)
-                        });
-                }
-                else {
-                    console.log('unable access')
-                }
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Sign Up Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate("/")
+                                }
+
+                            })
+
+
+
+                    })
+
+                    .catch(error => {
+                        console.log(error.message)
+                    });
+
             })
             .catch(error => {
                 console.log(error.message)

@@ -8,13 +8,11 @@ const ManageUsers = () => {
 
 
     const handleIsAdmin = user => {
-        console.log(user)
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.modifiedCount > 0) {
                     refetch();
                     Swal.fire({
@@ -28,13 +26,11 @@ const ManageUsers = () => {
     }
 
     const handleIsInstructor = user => {
-        console.log(user)
         fetch(`http://localhost:5000/users/instructor/${user._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.modifiedCount > 0) {
                     refetch();
                     Swal.fire({
@@ -87,10 +83,15 @@ const ManageUsers = () => {
                                     <span className="text-2xl font-serif font-bold text-slate-950">{user?.email}</span>
                                 </td>
                                 <td>
-                                    <button className="bg-rose-800 px-6 py-5 rounded-xl hover:bg-rose-600" onClick={() => handleIsAdmin(user)}><FaUserCheck className="text-white w-10 h-10" /></button>
+                                    {
+                                        users?.role === 'admin' ? 'admin' :
+                                            <button className="bg-rose-800 px-6 py-5 rounded-xl hover:bg-rose-600" onClick={() => handleIsAdmin(user)}><FaUserCheck className="text-white w-10 h-10" /></button>
+                                    }
                                 </td>
                                 <th>
-                                    <button className="bg-blue-800 px-6 py-5 rounded-xl hover:bg-blue-600" onClick={() => handleIsInstructor(users)}><FaChalkboardTeacher className="text-white w-10 h-10" /></button>
+                                    {users?.role === 'instructor' ? 'instructor' :
+                                        <button className="bg-blue-800 px-6 py-5 rounded-xl hover:bg-blue-600" onClick={() => handleIsInstructor(user)}><FaChalkboardTeacher className="text-white w-10 h-10" /></button>
+                                    }
                                 </th>
                             </tr>
                             )
