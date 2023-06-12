@@ -3,17 +3,21 @@ import emaBird from '../../../../src/assets/image/emaBird.png';
 import useHookContext from "../../CustomHook/useHookContext";
 import SubHeader from "./SubHeader/SubHeader";
 import ActiveLink from "../../Module/ActiveLink/ActiveLink";
+import useAdmin from "../../CustomHook/useAdmin";
+import useInstructor from "../../CustomHook/useInstructor";
 
 const Header = () => {
     const { user } = useHookContext();
     const location = useLocation();
     const subHeader = location.pathname.includes('/classes') || location.pathname.includes('/instructors');
+    const { isAdmin } = useAdmin();
+    const { isInstructors } = useInstructor();
 
     const navLinks = <>
-        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl "><ActiveLink to="/">Home</ActiveLink></li>
+        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/">Home</ActiveLink></li>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/instructors">Instructors</ActiveLink></li>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/classes">Classes</ActiveLink></li>
-        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
+        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to={`/dashboard/${isAdmin ? 'manage-classes' : isInstructors ? 'add-classes' : 'booking-classes'}`}>Dashboard</ActiveLink></li>
     </>
     return (
         <>

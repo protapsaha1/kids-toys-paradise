@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import useAxiosHook from "./useAxiosHook";
 
 const useUsers = () => {
+    const { axiosProtect } = useAxiosHook();
     const { data: users = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users')
-            return res.json()
+            const res = await axiosProtect.get('http://localhost:5000/users')
+            return res.data;
         }
     })
     return { users, loading, refetch }

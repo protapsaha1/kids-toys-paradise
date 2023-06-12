@@ -11,10 +11,10 @@ const Login = () => {
     useTitle("Login")
     const { UserSignIn } = useHookContext();
     const [show, setShow] = useState(false);
+    const [error, setError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
-    // TODO GET INPUT VALUE
 
     const handleLogin = e => {
         e.preventDefault();
@@ -22,13 +22,14 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        
+
         UserSignIn(email, password)
             .then(result => {
+                form.reset();
                 console.log(result.user)
                 Swal.fire({
                     icon: 'success',
-                    title: 'Your work has been saved',
+                    title: 'Login SuccessFully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -36,6 +37,7 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message)
+                setError(error.message);
             })
     }
 
@@ -50,6 +52,7 @@ const Login = () => {
                         </label>
                         <br />
                         <input type="email" className='h-[68px] w-[600px] text-2xl text-black bg-slate-50 ps-3 border-b-red-500' placeholder="Enter Your Email" name="email" id="email" />
+                        <p className="text-red-500 text-xl font-serif font-semibold">{error}</p>
                     </div>
                     <div>
                         <label>
@@ -64,11 +67,12 @@ const Login = () => {
                                 }
                             </span>
                         </label>
+                        <p className="text-red-500 text-xl font-serif font-semibold">{error}</p>
                     </div>
-                    <input className="w-[600px] h-[70px] bg-sky-500 rounded-lg text-3xl text-white font-bold font-serif mt-20" type="submit" value="Login" />
+                    <input className="w-[600px] h-[70px] bg-sky-500 rounded-lg text-3xl text-white font-bold font-serif mt-10" type="submit" value="Login" />
                 </form>
                 <div>
-                    <h3 className="text-xl font-serif uppercase font-semibold text-green-400 p-5 text-center">New in emagraphy ? <Link className="hover:text-rose-500" to="/registration">Create to account </Link> to make emagraphy member</h3>
+                    <h3 className="text-xl font-serif uppercase font-semibold text-green-400 p-5 text-center">New in emagraphy ? <Link className="hover:text-rose-500 hover:underline" to="/registration">Create to account </Link> to make emagraphy member</h3>
                     <hr className="h-1 bg-slate-200 mt-24" />
                     <SocialLogin />
                 </div>

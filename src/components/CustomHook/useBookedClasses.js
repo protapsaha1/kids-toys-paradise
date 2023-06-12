@@ -5,7 +5,7 @@ import useHookContext from "./useHookContext";
 const useBookedClasses = () => {
     const { axiosProtect } = useAxiosHook();
     const { user, loading } = useHookContext();
-    const { refetch, data: bookedClass = [] } = useQuery({
+    const { data: bookedClass = [], refetch } = useQuery({
         queryKey: ['bookedClass', user?.email],
         enabled: !loading,
         queryFn: async () => {

@@ -5,7 +5,9 @@ import useTitle from "../../../../CustomHook/useTitle";
 const ManageClasses = () => {
     useTitle("Manage Classes");
     const { classes, refetch } = useClasses();
-    console.log(classes)
+    const pending = classes.map(pend => pend.status === 'pending');
+    const approved = classes.map(approve => approve.status === 'approved');
+    const denied = classes.map(deny => deny.status === 'denied');
 
     // Approved
     const handleStatusApproved = id => {
@@ -60,6 +62,10 @@ const ManageClasses = () => {
                             <th className="text-2xl font-serif font-bold text-slate-950">Available Seats</th>
                             <th className="text-2xl font-serif font-bold text-slate-950">Price</th>
                             <th className="text-2xl font-serif font-bold text-slate-950">Status</th>
+                            {denied === true &&
+                                <th className={approved === true || pending === true ? 'hidden' : "text-2xl font-serif font-bold text-slate-950"}>Feedback</th>
+                            }
+
                         </tr>
                     </thead>
                     <tbody>
@@ -73,7 +79,7 @@ const ManageClasses = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-16 h-16">
                                                 <img src={classInfo?.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
@@ -111,6 +117,12 @@ const ManageClasses = () => {
                                                 <button onClick={() => handleStatusDenied(classInfo._id)} className={classInfo?.status === "approved" ? 'hidden' : 'bg-red-500 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm'}>Denied</button>
                                             }
                                         </>
+                                        <>
+                                            {
+                                                classInfo?.status === 'denied' &&
+                                                <button className={classInfo?.status === "approved" || classInfo?.status === "pending" ? 'hidden' : "bg-yellow-400 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm"}>Feedback</button>
+                                            }
+                                        </>
                                     </div>
                                 </th>
                             </tr>
@@ -119,7 +131,7 @@ const ManageClasses = () => {
 
                     </tbody>
                 </table>
-            </div>
+            </div >
         </>
     );
 };

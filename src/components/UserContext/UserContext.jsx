@@ -40,16 +40,16 @@ const UserContext = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, loginUser => {
-            setUser(loginUser)
+            setUser(loginUser);
 
 
             if (loginUser) {
                 axios.post('http://localhost:5000/jwtprotect', {
-                    email: loginUser?.email
+                    email: loginUser.email
                 })
                     .then(data => {
-                        setLoading(false);
                         localStorage.setItem('emagraphy-access', data.data.token)
+                        setLoading(false);
                     })
                     .catch(error => { console.log(error.message) })
             }
@@ -67,9 +67,9 @@ const UserContext = ({ children }) => {
         loading,
         newCreateUsers,
         UserSignIn,
+        googleLogin,
         userProfileUpdate,
-        logOut,
-        googleLogin
+        logOut
     }
 
 

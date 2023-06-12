@@ -7,10 +7,8 @@ import OopsErrorPage from "../components/Pages/OopsError/OopsErrorPage";
 import Dashboard from "../components/Layouts/Dashboard/Dashboard";
 import StudentHome from "../components/Pages/Dashboard/Student/Home/StudentHome";
 import MyClasses from "../components/Pages/Dashboard/Student/MyClasses/MyClasses";
-import EnrolledClasses from "../components/Pages/Dashboard/Student/EnrolledClasses/EnrolledClasses";
 import InstructorsHome from "../components/Pages/Dashboard/Instructors/InstructorsHome/InstructorsHome";
 import AddClasses from "../components/Pages/Dashboard/Instructors/AddClasses/AddClasses";
-import EnrolledStudents from "../components/Pages/Dashboard/Instructors/EnrolledStudents/EnrolledStudents";
 import AdminHome from "../components/Pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageClasses from "../components/Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../components/Pages/Dashboard/Admin/ManageUsers/ManageUsers";
@@ -19,6 +17,11 @@ import ErrorPage from "../components/Layouts/ErrorPage/ErrorPage";
 import Payment from "../components/Pages/Dashboard/Student/Payments/Payment/Payment";
 import Instructors from "../components/Pages/Instructors/Instructors/Instructors";
 import Classes from "../components/Pages/Classes/Classes/Classes";
+import InstructorPrivateRoute from "../components/PrivateRoute/InstructorsRoute/InstructorPrivateRoute";
+import AdminPrivateRoute from "../components/PrivateRoute/AdminRoute/AdminPrivateRoute";
+import Feedback from "../components/Pages/Dashboard/Admin/Feedback/Feedback";
+import EnrolledClasses from "../components/Pages/Dashboard/Student/EnrolledClasses/EnrolledClasses";
+import MyAddedClasses from "../components/Pages/Dashboard/Instructors/MyAddedClasses/MyAddedClasses";
 
 const router = createBrowserRouter([
     {
@@ -72,7 +75,7 @@ const router = createBrowserRouter([
                 element: <StudentHome />
             },
             {
-                path: 'my-classes',
+                path: 'booking-classes',
                 element: <MyClasses />
             },
             {
@@ -86,28 +89,32 @@ const router = createBrowserRouter([
             // Instructors route
             {
                 path: 'instructors-home',
-                element: <InstructorsHome />
+                element: <InstructorPrivateRoute><InstructorsHome /></InstructorPrivateRoute>
             },
             {
                 path: 'add-classes',
-                element: <AddClasses />
+                element: <InstructorPrivateRoute><AddClasses /></InstructorPrivateRoute>
             },
             {
-                path: 'enrolled-students',
-                element: <EnrolledStudents />
+                path: 'my-classes',
+                element: <InstructorPrivateRoute><MyAddedClasses /></InstructorPrivateRoute>
             },
             // Admin route
             {
                 path: 'admin-home',
-                element: <AdminHome />
+                element: <AdminPrivateRoute><AdminHome /></AdminPrivateRoute>
             },
             {
                 path: 'manage-classes',
-                element: <ManageClasses />
+                element: <AdminPrivateRoute><ManageClasses /></AdminPrivateRoute>
             },
             {
                 path: 'manage-users',
-                element: <ManageUsers />
+                element: <AdminPrivateRoute><ManageUsers /></AdminPrivateRoute>
+            },
+            {
+                path: 'feedback',
+                element: <AdminPrivateRoute><Feedback /></AdminPrivateRoute>
             }
         ]
     }

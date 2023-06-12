@@ -3,11 +3,22 @@ import useUsers from "../../../../CustomHook/useUsers";
 import Swal from "sweetalert2";
 import useTitle from "../../../../CustomHook/useTitle";
 
+
 const ManageUsers = () => {
     useTitle("Manage User");
+   
 
     const { users, refetch } = useUsers();
-    // console.log(users)
+    console.log(users)
+    // const { data: users = [], refetch } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = axiosProtect.get('/users')
+    //         return res.data;
+    //     }
+    // });
+
+    console.log(users)
 
 
     const handleIsAdmin = user => {
@@ -72,7 +83,7 @@ const ManageUsers = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-16 h-16">
                                                 <img src={user?.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>

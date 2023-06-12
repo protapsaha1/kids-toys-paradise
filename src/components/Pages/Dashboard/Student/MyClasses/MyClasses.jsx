@@ -10,7 +10,6 @@ const MyClasses = () => {
     console.log(bookedClass)
 
     const handleDeleteBookedClass = id => {
-        console.log(id)
         fetch(`http://localhost:5000/bookedClass/${id}`, {
             method: "DELETE"
         })
@@ -65,7 +64,7 @@ const MyClasses = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-16 h-16">
                                                 <img src={myClass?.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>

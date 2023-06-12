@@ -6,9 +6,9 @@ const useInstructors = () => {
     const { user } = useHookContext();
     const { axiosProtect } = useAxiosHook();
     const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
-        queryKey: ['isAdmin', user?.email],
+        queryKey: ['isInstructor', user?.email],
         queryFn: async () => {
-            const res = await axiosProtect.get(`/users/admin/${user?.email}`)
+            const res = await axiosProtect.get(`/users/instructor/${user?.email}`)
             return res.data.instructor;
         }
     })

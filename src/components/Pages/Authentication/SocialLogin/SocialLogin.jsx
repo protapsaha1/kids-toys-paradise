@@ -2,16 +2,16 @@ import useHookContext from "../../../CustomHook/useHookContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+
 const SocialLogin = () => {
     const { googleLogin } = useHookContext();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
-    
+
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                console.log(result.user)
                 const loginUser = result.user;
                 const user = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL };
                 fetch('http://localhost:5000/users', {
@@ -23,7 +23,6 @@ const SocialLogin = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
                         if (data.insertedId) {
                             Swal.fire({
                                 icon: 'success',

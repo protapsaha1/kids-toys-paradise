@@ -14,6 +14,7 @@ const SignUp = () => {
     const [show, setShow] = useState(false);
     const [conShow, setConShow] = useState(false);
     const navigate = useNavigate();
+    const [conError, setConError] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -28,7 +29,7 @@ const SignUp = () => {
         const photo = form.photo.value;
 
         if (password !== conPassword) {
-            setError("Password must be confirm");
+            setConError("Password must be confirm");
             return;
         }
 
@@ -36,7 +37,7 @@ const SignUp = () => {
             setError("password must be 6 characters");
         }
 
-        if (!/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
+        if (!(/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password))) {
             setError("Password have one uppercase ,one lowercase and one special character");
         }
         if (/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/.test(password)) {
@@ -48,11 +49,9 @@ const SignUp = () => {
             .then(result => {
                 const loginUser = result.user;
                 console.log(loginUser);
-
                 userProfileUpdate(name, photo)
-                    .then(result => {
-                        const loginUser = result.user;
-                        console.log(loginUser);
+                    .then(() => {
+
                         // TODO POST DATA 
                         fetch('http://localhost:5000/users', {
                             method: "POST",
@@ -63,8 +62,6 @@ const SignUp = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
-                                console.log(data)
-
                                 if (data.insertedId) {
                                     Swal.fire({
                                         icon: 'success',
@@ -79,8 +76,8 @@ const SignUp = () => {
                     .catch(error => {
                         console.log(error.message)
                     });
-                form.reset();
 
+                form.reset();
                 navigate("/");
             })
             .catch(error => {
@@ -137,6 +134,7 @@ const SignUp = () => {
                                 }
                             </span>
                         </label>
+                        <p className="text-xl font-serif font-semibold text-red-500">{conError}</p>
                     </div>
                     <div className='mb-3 mt-5'>
                         <label>
@@ -148,7 +146,7 @@ const SignUp = () => {
                     <input className="w-[600px] h-[70px] bg-sky-500 rounded-lg text-3xl text-white font-bold font-serif mt-20" type="submit" value="Sign Up" />
                 </form>
                 <div>
-                    <h3 className="text-xl font-serif uppercase font-semibold text-green-400 p-5 text-center">Have account in emagraphy ? <Link className="hover:text-rose-500" to="/login">Login</Link></h3>
+                    <h3 className="text-xl font-serif uppercase font-semibold text-green-400 p-5 text-center">Have account in emagraphy ? <Link className="hover:text-rose-500 hover:underline" to="/login">Login</Link></h3>
                     <hr className="h-1 bg-slate-200 mt-24" />
                     <SocialLogin />
                 </div>

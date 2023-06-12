@@ -30,25 +30,25 @@
 }
 
 .spinner-1-sec-t-red {
-    border-top-color: lightcoral;
+    border-top-color: rgb(214, 58, 58);
     --duration: 0.5s;
     --timing: ease-in-out;
 }
 
 .spinner-1-sec-r-green {
-    border-right-color: lightgreen;
+    border-right-color: rgb(56, 216, 56);
     --duration: 1s;
     --timing: ease-in;
 }
 
 .spinner-1-sec-b-blue {
-    border-bottom-color: lightblue;
+    border-bottom-color: rgb(45, 169, 210);
     --duration: 1.5s;
     --timing: ease-out;
 }
 
 .spinner-1-sec-l-sky {
-    border-left-color: lightskyblue;
+    border-left-color: rgb(28, 137, 205);
     --duration: 2s;
     --timing: ease-in-out;
 }

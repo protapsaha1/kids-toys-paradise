@@ -20,11 +20,15 @@ const useAxiosHook = () => {
             }
             return config;
         })
+        // const token = localStorage.getItem('emagraphy-access');
+        // if (token) {
+        //     axiosProtect.defaults.headers.common['Authorization'] = `bearer ${token}`;
+        // }
 
         axiosProtect.interceptors.response.use(
-            res => res,
+            response => response,
             async (error) => {
-                if (error.res && error.res.status === 401 || error.res && error.res.status === 403) {
+                if (error.response && error.response.status === 401 || error.response && error.response.status === 403) {
                     await logOut();
                     navigate('/login');
                 }
