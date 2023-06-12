@@ -4,8 +4,6 @@ import Home from "../components/Pages/Home/Home/Home";
 import Login from "../components/Pages/Authentication/Login/Login";
 import SignUp from "../components/Pages/Authentication/SignUp/SignUp";
 import OopsErrorPage from "../components/Pages/OopsError/OopsErrorPage";
-import Instructors from "../components/Pages/Instructors/Instructors";
-import Classes from "../components/Pages/Classes/Classes";
 import Dashboard from "../components/Layouts/Dashboard/Dashboard";
 import StudentHome from "../components/Pages/Dashboard/Student/Home/StudentHome";
 import MyClasses from "../components/Pages/Dashboard/Student/MyClasses/MyClasses";
@@ -19,6 +17,8 @@ import ManageUsers from "../components/Pages/Dashboard/Admin/ManageUsers/ManageU
 import UserPrivateRoute from "../components/PrivateRoute/UserRoute/UserPrivateRoute";
 import ErrorPage from "../components/Layouts/ErrorPage/ErrorPage";
 import Payment from "../components/Pages/Dashboard/Student/Payments/Payment/Payment";
+import Instructors from "../components/Pages/Instructors/Instructors/Instructors";
+import Classes from "../components/Pages/Classes/Classes/Classes";
 
 const router = createBrowserRouter([
     {

@@ -1,5 +1,5 @@
-import useClasses from "../../CustomHook/useClasses";
-import ClassesCard from "../../Module/ClassesCard/ClassesCard";
+import useClasses from "../../../CustomHook/useClasses";
+import ClassesCard from "../ClassesCard/ClassesCard";
 
 const Classes = () => {
     const { classes } = useClasses();
@@ -10,7 +10,6 @@ const Classes = () => {
                 approvedClasses.map(eachClass => <ClassesCard
                     key={eachClass._id}
                     eachClass={eachClass}
-
                 />)
             }
         </div>

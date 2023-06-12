@@ -96,25 +96,21 @@ const ManageClasses = () => {
                                 </th>
                                 <th>
                                     <div className="text-2xl font-serif font-bold text-slate-950 flex">
-                                        {
-                                            classInfo?.status === 'approved'
-                                                ?
-                                                <>
-                                                    {classInfo?.status === "approved" ?
-                                                        <h1 className="text-2xl font-serif font-bold text-slate-950">Approved</h1>
-                                                        :
-                                                        <button onClick={() => handleStatusApproved(classInfo._id)} className="bg-green-500 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm">Approved</button>
-                                                    }
-                                                </>
+                                        <>
+                                            {classInfo?.status === "approved" ?
+                                                <h1 className="text-2xl font-serif font-bold text-slate-950">Approved</h1>
                                                 :
-                                                <>
-                                                    {classInfo?.status === "denied" ?
-                                                        <h1 className="text-2xl font-serif font-bold text-slate-950">Denied</h1>
-                                                        :
-                                                        <button onClick={() => handleStatusDenied(classInfo._id)} className={`bg-red-500 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm`}>Denied</button>
-                                                    }
-                                                </>
-                                        }
+                                                <button onClick={() => handleStatusApproved(classInfo._id)} className={classInfo?.status === "denied" ? 'hidden' : "bg-green-500 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm"}>Approved</button>
+                                            }
+                                        </>
+
+                                        <>
+                                            {classInfo?.status === "denied" ?
+                                                <h1 className="text-2xl font-serif font-bold text-slate-950">Denied</h1>
+                                                :
+                                                <button onClick={() => handleStatusDenied(classInfo._id)} className={classInfo?.status === "approved" ? 'hidden' : 'bg-red-500 text-2xl font-serif font-bold text-slate-50 mr-3 px-3 py-2 rounded-sm'}>Denied</button>
+                                            }
+                                        </>
                                     </div>
                                 </th>
                             </tr>

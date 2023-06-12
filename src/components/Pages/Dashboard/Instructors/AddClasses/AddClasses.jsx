@@ -4,7 +4,7 @@ import useTitle from "../../../../CustomHook/useTitle";
 
 
 
-const user_image_upload_api = import.meta.env.VITE_IMAGE_UPLOAD
+const user_image_upload_api = import.meta.env.VITE_IMAGE_UPLOAD;
 const AddClasses = () => {
     useTitle("Add Classes")
     const { user } = useHookContext();
@@ -20,19 +20,6 @@ const AddClasses = () => {
         const price = parseFloat(form.price.value);
         const image = form.image.files[0];
         const classInfo = { class_name: name, instructor_name: instructorName, instructor_email: instructorEmail, seats: seats, price: price };
-        const instructorInfo = { name: instructorName, email: instructorEmail };
-
-        fetch('http://localhost:5000/instructors', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(instructorInfo)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
         const formData = new FormData();
         formData.append('image', image)
         fetch(image_hosing_url, {
@@ -56,6 +43,7 @@ const AddClasses = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
+                            form.reset();
                             if (data.insertedId) {
                                 Swal.fire({
                                     icon: 'success',

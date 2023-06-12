@@ -24,20 +24,20 @@ const Dashboard = () => {
 
                         isAdmin
                             ?
-                            <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy
+                            <h1 className="text-6xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy
                                 <br />
                                 <span className="text-4xl">Admin</span>
 
                             </h1>
+                            // isInstructor
+                            //     ?
+                            //     <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Instructor</span></h1>
                             :
                             <h1 className="text-6xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy
                                 <br />
                                 <span className="text-4xl">Students</span>
                             </h1>
                         // :
-                        // isInstructor
-                        //     ?
-                        // <h1 className="text-4xl text-green-700 font-serif font-bold mt-10 mb-10 text-center">EmaGraphy <span>Instructor</span></h1>
                     }
 
 
@@ -51,18 +51,18 @@ const Dashboard = () => {
                                 <li><NavLink to="/dashboard/manage-users" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaUsers className="w-12 h-12 mr-3" />  Manage Users</NavLink></li>
                             </>
                             :
+                            // isInstructor
+                            //     ?
+                            //     <>
+                            //         <li><NavLink to="/dashboard/instructors-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12" />   Instructors Home</NavLink></li>
+                            //         <li><NavLink to="/dashboard/add-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaBars className="w-12 h-12" />   Add Class</NavLink></li>
+                            //         <li><NavLink to="/dashboard/enrolled-students" className="flex items-center text-3xl font-bold font-serif text-slate-900">   Enrolled Students</NavLink></li>
+                            //     </> :
                             <>
                                 <li><NavLink to="/dashboard/student-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12 mr-3" />    Student Home</NavLink></li>
                                 <li><NavLink to="/dashboard/my-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaSchool className="w-12 h-12 mr-3" />   My Classes</NavLink></li>
                                 <li><NavLink to="/dashboard/enrolled-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaMoneyBillAlt className="w-12 h-12 mr-3" />   My Enrolled Classes</NavLink></li>
                             </>
-                        // : isInstructor
-                        //     ?
-                        //     <>
-                        //         <li><NavLink to="/dashboard/instructors-home" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaHome className="w-12 h-12" />   Instructors Home</NavLink></li>
-                        //         <li><NavLink to="/dashboard/add-classes" className="flex items-center text-3xl font-bold font-serif text-slate-900"><FaBars className="w-12 h-12" />   Add Class</NavLink></li>
-                        //         <li><NavLink to="/dashboard/enrolled-students" className="flex items-center text-3xl font-bold font-serif text-slate-900">   Enrolled Students</NavLink></li>
-                        //     </> :
 
                     }
                     <hr className="my-10 bg-black h-1 shadow-lg" />
