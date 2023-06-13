@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useHookContext from "../../../../CustomHook/useHookContext";
 import useTitle from "../../../../CustomHook/useTitle";
+import useAxiosHook from "../../../../CustomHook/useAxiosHook";
 
 
 
@@ -9,7 +10,7 @@ const AddClasses = () => {
     useTitle("Add Classes")
     const { user } = useHookContext();
     const image_hosing_url = `https://api.imgbb.com/1/upload?key=${user_image_upload_api}`;
-
+    const { axiosProtect } = useAxiosHook();
     const handleAddClasses = e => {
         e.preventDefault();
         const form = e.target;
@@ -34,17 +35,17 @@ const AddClasses = () => {
                     // TODO
                     const classData = { class_name, instructor_name, instructor_email, seats, price, image: img, status: 'pending' }
 
-                    fetch('http://localhost:5000/classes', {
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json"
-                        },
-                        body: JSON.stringify(classData)
-                    })
-                        .then(res => res.json())
+                    axiosProtect.post('/classes', classData)
+                        // method: "POST",
+                        // headers: {
+                        //     "content-type": "application/json"
+                        // },
+                        // body: JSON.stringify(classData)
+
+                        // .then(res => res.json())
                         .then(data => {
-                            form.reset();
-                            if (data.insertedId) {
+
+                            if (data.data.insertedId) {
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'New class added Successfully',
@@ -52,8 +53,8 @@ const AddClasses = () => {
                                     timer: 1500
                                 })
                             }
-
                         })
+                    form.reset();
                 }
             });
     }
