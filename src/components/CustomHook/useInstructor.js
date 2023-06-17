@@ -6,7 +6,7 @@ const useInstructor = () => {
     const { data: instructors = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['instructor'],
         queryFn: async () => {
-            const res = await axiosProtect.get('http://localhost:5000/instructors')
+            const res = await axiosProtect.get('/instructors')
             return res.data;
         }
     })

@@ -1,15 +1,36 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosHook from "../../../../../CustomHook/useAxiosHook";
+import useHookContext from "../../../../../CustomHook/useHookContext";
 // import './PaymentFrom.css';
 
-const PaymentForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
+const PaymentForm = ({ price }) => {
+    const { axiosProtect } = useAxiosHook();
     const [error, setError] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
+    const { user } = useHookContext();
+    const elements = useElements();
+    const stripe = useStripe();
+
+    console.log(price)
+
+
+    useEffect(() => {
+        axiosProtect.post('/payment', { price })
+            .then(data => {
+                console.log(data.data.clientSecret)
+                setClientSecret(data.data.clientSecret)
+            })
+    }, [])
+
+
+
+
+
 
     const handlePayment = async (e) => {
         e.preventDefault();
-
+        console.log(stripe)
         if (!stripe || !elements) {
             return;
         }
@@ -32,6 +53,22 @@ const PaymentForm = () => {
             console.log('[paymentMethod]', paymentMethod)
             setError('');
         }
+
+
+        const { paymentIntent, error: confirmErr } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user?.displayName || 'anonymous',
+                    email: user?.email || 'unknown'
+                },
+            },
+        });
+        if (confirmErr) {
+            console.log(confirmErr);
+            // setError(confirmErr)
+        }
+        console.log(paymentIntent)
     };
 
 
@@ -54,7 +91,7 @@ const PaymentForm = () => {
                         },
                     }}
                 />
-                <button className="bg-blue-800 px-4 py-3 rounded-xl hover:bg-blue-600 text-xl font-serif font-bold text-white mt-8" type="submit" disabled={!stripe}>
+                <button className="bg-blue-800 px-4 py-3 rounded-xl hover:bg-blue-600 text-xl font-serif font-bold text-white mt-8" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
             </form>
@@ -64,3 +101,5 @@ const PaymentForm = () => {
 };
 
 export default PaymentForm;
+
+//  loading loading-spinner

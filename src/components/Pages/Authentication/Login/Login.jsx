@@ -11,7 +11,7 @@ const Login = () => {
     useTitle("Login")
     const { UserSignIn } = useHookContext();
     const [show, setShow] = useState(false);
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
@@ -37,7 +37,13 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message)
-                setError(error.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    showConfirmButton: false,
+                    timer: 500
+                })
+               
             })
     }
 
@@ -52,7 +58,7 @@ const Login = () => {
                         </label>
                         <br />
                         <input type="email" className='h-[68px] w-[600px] text-2xl text-black bg-slate-50 ps-3 border-b-red-500' placeholder="Enter Your Email" name="email" id="email" />
-                        <p className="text-red-500 text-xl font-serif font-semibold">{error}</p>
+                        {/* <p className="text-red-500 text-xl font-serif font-semibold">{error}</p> */}
                     </div>
                     <div>
                         <label>
@@ -67,7 +73,7 @@ const Login = () => {
                                 }
                             </span>
                         </label>
-                        <p className="text-red-500 text-xl font-serif font-semibold">{error}</p>
+                        {/* <p className="text-red-500 text-xl font-serif font-semibold">{error}</p> */}
                     </div>
                     <input className="w-[600px] h-[70px] bg-sky-500 rounded-lg text-3xl text-white font-bold font-serif mt-10" type="submit" value="Login" />
                 </form>

@@ -11,20 +11,20 @@ import photo5 from '../../../../assets/image/photo5.jpg';
 const Banner = () => {
     return (
         <Carousel>
-            <div className="h-[700px]">
+            <div >
                 <img src={photo1} />
             </div>
-            <div className="h-[700px]">
+            <div >
                 <img src={photo2} />
             </div>
-            <div className="h-[700px]">
+            <div >
                 <img src={photo3} />
             </div>
-            <div className="h-[700px]">
+            <div >
                 <img src={photo4} />
             </div>
-            <div className="h-[700px] ">
-                <img className="h-full" src={photo5} />
+            <div >
+                <img src={photo5} />
             </div>
         </Carousel>
 

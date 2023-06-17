@@ -33,7 +33,7 @@ const AddClasses = () => {
                     const img = imgRes.data.display_url;
                     const { class_name, instructor_name, instructor_email, seats, price } = classInfo;
                     // TODO
-                    const classData = { class_name, instructor_name, instructor_email, seats, price, image: img, status: 'pending' }
+                    const classData = { class_name, instructor_name, instructor_email, seats, price, image: img, status: 'pending', enrolled: 0 }
 
                     axiosProtect.post('/classes', classData)
                         // method: "POST",

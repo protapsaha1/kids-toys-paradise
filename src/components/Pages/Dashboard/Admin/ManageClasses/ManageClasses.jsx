@@ -1,22 +1,21 @@
 import Swal from "sweetalert2";
 import useClasses from "../../../../CustomHook/useClasses";
 import useTitle from "../../../../CustomHook/useTitle";
+import useAxiosHook from "../../../../CustomHook/useAxiosHook";
 
 const ManageClasses = () => {
     useTitle("Manage Classes");
     const { classes, refetch } = useClasses();
+    const { axiosProtect } = useAxiosHook();
     const pending = classes.map(pend => pend.status === 'pending');
     const approved = classes.map(approve => approve.status === 'approved');
     const denied = classes.map(deny => deny.status === 'denied');
 
     // Approved
     const handleStatusApproved = id => {
-        fetch(`http://localhost:5000/classes/${id}`, {
-            method: "PUT"
-        })
-            .then(res => res.json())
+        axiosProtect.put(`/classes/${id}`)
             .then(data => {
-                if (data.modifiedCount > 0) {
+                if (data.data.modifiedCount > 0) {
                     refetch();
                     Swal.fire({
                         icon: 'success',
@@ -29,12 +28,9 @@ const ManageClasses = () => {
     };
     // Denied
     const handleStatusDenied = id => {
-        fetch(`http://localhost:5000/classes/${id}`, {
-            method: "PUT"
-        })
-            .then(res => res.json())
+        axiosProtect.put(`/classes/${id}`)
             .then(data => {
-                if (data.modifiedCount > 0) {
+                if (data.data.modifiedCount > 0) {
                     refetch();
                     Swal.fire({
                         icon: 'success',
@@ -69,7 +65,7 @@ const ManageClasses = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {classes &&
                             classes.map((classInfo, index) => <tr
                                 key={classInfo._id}
                             >

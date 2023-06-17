@@ -14,7 +14,7 @@ const SocialLogin = () => {
             .then(result => {
                 const loginUser = result.user;
                 const user = { name: loginUser?.displayName, email: loginUser?.email, image: loginUser?.photoURL };
-                fetch('http://localhost:5000/users', {
+                fetch('https://emagraphy-server-protapsaha1.vercel.app/users', {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"

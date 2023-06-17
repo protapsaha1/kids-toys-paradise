@@ -6,23 +6,12 @@ import useTitle from "../../../../CustomHook/useTitle";
 
 const ManageUsers = () => {
     useTitle("Manage User");
-   
+
 
     const { users, refetch } = useUsers();
-    console.log(users)
-    // const { data: users = [], refetch } = useQuery({
-    //     queryKey: ['users'],
-    //     queryFn: async () => {
-    //         const res = axiosProtect.get('/users')
-    //         return res.data;
-    //     }
-    // });
-
-    console.log(users)
-
 
     const handleIsAdmin = user => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://emagraphy-server-protapsaha1.vercel.app/users/admin/${user._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -40,7 +29,7 @@ const ManageUsers = () => {
     }
 
     const handleIsInstructor = user => {
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://emagraphy-server-protapsaha1.vercel.app/users/instructor/${user._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -73,7 +62,7 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {users &&
                             users.map((user, index) => <tr
                                 key={user._id}
                             >

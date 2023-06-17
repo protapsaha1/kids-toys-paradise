@@ -8,7 +8,7 @@ const useAxiosHook = () => {
     const navigate = useNavigate();
 
     const axiosProtect = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: 'https://emagraphy-server-protapsaha1.vercel.app',
     });
 
 

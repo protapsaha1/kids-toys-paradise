@@ -12,12 +12,11 @@ const ClassesCard = ({ eachClass }) => {
     const { isAdmin } = useAdmin();
     const { isInstructor } = useInstructors();
     const { _id, class_name, image, price, seats } = eachClass;
-    console.log(isAdmin, isInstructor)
     const bookedClassData = { classId: _id, name: class_name, price: price, image: image, email: user?.email };
 
     const handleBookingsClass = () => {
         if (user && user?.email) {
-            fetch('http://localhost:5000/bookedClass', {
+            fetch('https://emagraphy-server-protapsaha1.vercel.app/bookedClass', {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

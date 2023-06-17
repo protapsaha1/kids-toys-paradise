@@ -2,21 +2,33 @@ import Swal from "sweetalert2";
 import useBookedClasses from "../../../../CustomHook/useBookedClasses";
 import useTitle from "../../../../CustomHook/useTitle";
 import { Link } from "react-router-dom";
+import useAxiosHook from "../../../../CustomHook/useAxiosHook";
+import Pagination from "../../../../Module/Pagination/Pagination";
+// import Payment from "../Payments/Payment/Payment";
+// import { useState } from "react";
 
 const MyClasses = () => {
     useTitle("My classes");
     const { bookedClass, refetch } = useBookedClasses();
-    // TODO
-    console.log(bookedClass)
+    const { axiosProtect } = useAxiosHook();
+    // const [price, setPrice] = useState();
+
+
+    // const handlePayment = price => {
+    //     // const price = item.price
+    //     console.log(price)
+    //     return price;
+    //     // return setPrice(price);
+    // }
+
+
+
 
     const handleDeleteBookedClass = id => {
-        fetch(`http://localhost:5000/bookedClass/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
+        axiosProtect.delete(`/bookedClass/${id}`)
             .then(data => {
-                console.log(data)
-                if (data.deletedCount > 0) {
+                console.log(data.data)
+                if (data.data.deletedCount > 0) {
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do You Want to Delete Booking Class",
@@ -54,7 +66,7 @@ const MyClasses = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {bookedClass &&
                             bookedClass.map((myClass, index) => <tr
                                 key={myClass._id}
                             >
@@ -74,10 +86,14 @@ const MyClasses = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    <h1 className="text-2xl font-serif font-bold text-slate-950">$ {myClass.price}</h1>
+                                    <h1 className="text-2xl font-serif font-bold text-slate-950">$ {myClass?.price}</h1>
                                 </td>
                                 <td>
-                                    <Link to="/dashboard/payment"><button className="bg-blue-800 px-6 py-5 rounded-xl hover:bg-blue-600 text-2xl font-serif font-bold text-white">Pay</button></Link>
+                                    <>
+                                        <Link to="/dashboard/payment"><button
+                                            className="bg-blue-800 px-6 py-5 rounded-xl hover:bg-blue-600 text-2xl font-serif font-bold text-white">Pay</button></Link>
+                                        {/* {!myClass.price || <Payment  className="hidden" price={myClass?.price} />} */}
+                                    </>
                                 </td>
                                 <th>
                                     <button onClick={() => handleDeleteBookedClass(myClass._id)} className="bg-rose-800 px-6 py-5 rounded-xl hover:bg-rose-600 text-2xl font-serif font-bold text-white">Del</button>
@@ -88,6 +104,12 @@ const MyClasses = () => {
 
                     </tbody>
                 </table>
+            </div >
+            <div className="mt-10">
+                <Pagination
+                    dataLength={bookedClass.length}
+                    elementEachPages={6}
+                />
             </div>
         </>
     );

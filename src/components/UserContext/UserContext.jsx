@@ -44,7 +44,7 @@ const UserContext = ({ children }) => {
 
 
             if (loginUser) {
-                axios.post('http://localhost:5000/jwtprotect', {
+                axios.post('https://emagraphy-server-protapsaha1.vercel.app/jwtprotect', {
                     email: loginUser.email
                 })
                     .then(data => {

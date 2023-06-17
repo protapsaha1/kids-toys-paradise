@@ -53,7 +53,7 @@ const SignUp = () => {
                     .then(() => {
 
                         // TODO POST DATA 
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://emagraphy-server-protapsaha1.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"

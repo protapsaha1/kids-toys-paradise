@@ -4,24 +4,24 @@ import useHookContext from "../../CustomHook/useHookContext";
 import SubHeader from "./SubHeader/SubHeader";
 import ActiveLink from "../../Module/ActiveLink/ActiveLink";
 import useAdmin from "../../CustomHook/useAdmin";
-import useInstructor from "../../CustomHook/useInstructor";
+import useInstructors from "../../CustomHook/useInstructors";
 
 const Header = () => {
     const { user } = useHookContext();
     const location = useLocation();
     const subHeader = location.pathname.includes('/classes') || location.pathname.includes('/instructors');
     const { isAdmin } = useAdmin();
-    const { isInstructors } = useInstructor();
+    const { isInstructor } = useInstructors()
 
     const navLinks = <>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/">Home</ActiveLink></li>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/instructors">Instructors</ActiveLink></li>
         <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to="/classes">Classes</ActiveLink></li>
-        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to={`/dashboard/${isAdmin ? 'manage-classes' : isInstructors ? 'add-classes' : 'booking-classes'}`}>Dashboard</ActiveLink></li>
+        <li className="mx-3 text-rose-600 hover:text-rose-400 font-serif font-semibold text-3xl"><ActiveLink to={`/dashboard/${isAdmin ? 'manage-classes' : isInstructor ? 'add-classes' : 'booking-classes'}`}>Dashboard</ActiveLink></li>
     </>
     return (
         <>
-            <div className="navbar h-[100px] bg-slate-100 ">
+            <div className="navbar h-[130px] bg-slate-100 ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         {/* <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -45,7 +45,15 @@ const Header = () => {
                 </div>
                 <div className="navbar-end pr-20">
                     {user ?
-                        <img className="w-[70px] h-[70px] rounded-[50%]" src={user?.photoURL} alt="" />
+                        <div className="items-center">
+                            <img className="w-[70px] h-[70px] rounded-[50%] mx-10" src={user?.photoURL} alt="" />
+                            {
+                                isAdmin && <h1 className="text-2xl font-bold text-rose-500">Admin</h1>
+                            }
+                            {
+                                isInstructor && <h1 className="text-3xl font-bold text-rose-500 font-serif">Instructor</h1>
+                            }
+                        </div>
                         : <Link to="/login"><button className=" hover:text-rose-400  text-4xl font-bold font-serif text-rose-600 mr-10 bg-yellow-300 px-6 py-5 rounded-[80px] hover:bg-yellow-200">Login</button></Link>
                     }
                 </div>
